@@ -10,7 +10,39 @@ def home():
 
 @app.route('/predict_sales', methods=['POST'])
 def predict_sales():
-    user_input = {
+    print(request.form)
+
+    def convert_input(input_data):
+        user_input = {
+            'Item_Weight': int(input_data.get('Item_Weight')),
+            'Item_Fat_Content': int(input_data.get('Item_Fat_Content')),
+            'Item_Visibility': float(input_data.get('Item_Visibility')),
+            'Item_MRP': int(input_data.get('Item_MRP')),
+            'Outlet_Size': int(input_data.get('Outlet_Size')),
+            'Outlet_Location_Type': int(input_data.get('Outlet_Location_Type')),
+            'Outlet_Type': 1, # TODO   
+            'Outlet_Age': int(input_data.get('Outlet_Age', 0)),
+        }
+
+        # Assuming binary (0 or 1) for the presence of each item type
+        item_types = [
+            'Breads', 'Breakfast', 'Canned', 'Dairy', 'Frozen Foods', 'Fruits and Vegetables',
+            'Hard Drinks', 'Health and Hygiene', 'Household', 'Meat', 'Others', 'Seafood',
+            'Snack Foods', 'Soft Drinks', 'Starchy Foods'
+        ]
+        for item_type in item_types:
+            user_input[f'Item_Type_{item_type}'] = int(input_data.get(f'Item_Type_{item_type}', 0))
+
+        # Assuming binary (0 or 1) for the presence of each outlet identifier
+        outlet_identifiers = [
+            'OUT013', 'OUT017', 'OUT018', 'OUT019', 'OUT027', 'OUT035', 'OUT045', 'OUT046', 'OUT049'
+        ]
+        for outlet_identifier in outlet_identifiers:
+            user_input[f'Outlet_Identifier_{outlet_identifier}'] = int(input_data.get(f'Outlet_Identifier_{outlet_identifier}', 0))
+
+        return user_input
+
+    dummy_input = {
         'Item_Weight': 5,  # Assuming weight is between 5 to 20 units
         'Item_Fat_Content': 0,  # 0 for 'Low Fat', 1 for 'Regular'
         'Item_Visibility': 0.2,  # Assuming visibility is a value between 0.0 to 0.2
@@ -46,6 +78,10 @@ def predict_sales():
         'Outlet_Identifier_OUT046': 0,
         'Outlet_Identifier_OUT049': 0
     }
+
+    user_input = convert_input(request.form)
+    print(user_input)
+
     # Load the saved model from the file
     with open('BigMart_Sales_Model.pkl', 'rb') as file:
         loaded_model = pickle.load(file)
