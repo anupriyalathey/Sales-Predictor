@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Prediction</title>
+</head>
+<body>
+    <h1>Sales Prediction Form</h1>
+    <form id="salesForm">
+        <label for="input1">Input 1:</label>
+        <input type="text" id="input1" name="input1" required>
+        <br>
+        <label for="input2">Input 2:</label>
+        <input type="text" id="input2" name="input2" required>
+        <br>
+        <button type="button" onclick="predictSales()">Predict Sales</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        function predictSales() {
+            var form = document.getElementById("salesForm");
+            var formData = new FormData(form);
+
+            fetch('/predict_sales', {
+                method: 'POST',
+                // body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("result").innerText = 'Predicted Sales: ' + data.prediction;
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
