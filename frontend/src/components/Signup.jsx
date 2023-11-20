@@ -14,12 +14,48 @@ import {
   Link as ChakraLink,
   useColorModeValue,
 } from '@chakra-ui/react'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from 'react'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import {auth} from "../firebase/firebaseConfig";
 
 export default function Signup() {
+  const navigate = useNavigate();
+  const [values, setValues] = useState({
+    name: "",
+    email: "",
+    pass: "",
+  });
+  const [errorMsg, setErrorMsg] = useState("");
+  const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
+
+  const handleSubmission = () => {
+    if (!values.name || !values.email || !values.pass) {
+      setErrorMsg("Fill all fields");
+      return;
+    }
+    setErrorMsg("");
+
+    setSubmitButtonDisabled(true);
+    createUserWithEmailAndPassword(auth, values.email, values.pass)
+      .then(async (res) => {
+        setSubmitButtonDisabled(false);
+        const user = res.user;
+        await updateProfile(user, {
+          displayName: values.name,
+        });
+        navigate("/sales");
+      })
+      .catch((err) => {
+        setSubmitButtonDisabled(false);
+        setErrorMsg(err.message);
+      });
+  };
   const [showPassword, setShowPassword] = useState(false)
+//   const [email, setEmail] = useState("");
+//   const [password, setPassword] = useState("");
+//   const [name, setName] = useState("");
 
   return (
     <Flex
@@ -43,7 +79,9 @@ export default function Signup() {
               <Box>
                 <FormControl id="firstName" isRequired>
                   <FormLabel>First Name</FormLabel>
-                  <Input type="text" />
+                  <Input type="text" onChange={(event) =>
+            setValues((prev) => ({ ...prev, name: event.target.value }))
+          }/>
                 </FormControl>
               </Box>
               <Box>
@@ -53,14 +91,18 @@ export default function Signup() {
                 </FormControl>
               </Box>
             </HStack>
-            <FormControl id="email" isRequired>
+            <FormControl id="email" name="email" isRequired>
               <FormLabel>Email address</FormLabel>
-              <Input type="email" />
+              <Input type="email" onChange={(event) =>
+            setValues((prev) => ({ ...prev, email: event.target.value }))
+          } />
             </FormControl>
             <FormControl id="password" isRequired>
               <FormLabel>Password</FormLabel>
               <InputGroup>
-                <Input type={showPassword ? 'text' : 'password'} />
+                <Input type={showPassword ? 'text' : 'password'} onChange={(event) =>
+            setValues((prev) => ({ ...prev, pass: event.target.value }))
+          }  />
                 <InputRightElement h={'full'}>
                   <Button
                     variant={'ghost'}
@@ -71,6 +113,8 @@ export default function Signup() {
               </InputGroup>
             </FormControl>
             <Stack spacing={10} pt={2}>
+            {errorMsg && <Text color={'red'}>{errorMsg}</Text>}
+
               <Button
                 loadingText="Submitting"
                 size="lg"
@@ -78,7 +122,10 @@ export default function Signup() {
                 color={'white'}
                 _hover={{
                   bg: 'blue.500',
-                }}>
+                }}
+                onClick=
+                    {handleSubmission} disabled={submitButtonDisabled}
+                >
                 Sign up
               </Button>
             </Stack>
