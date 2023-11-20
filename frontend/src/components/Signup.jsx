@@ -53,9 +53,6 @@ export default function Signup() {
       });
   };
   const [showPassword, setShowPassword] = useState(false)
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-//   const [name, setName] = useState("");
 
   return (
     <Flex
