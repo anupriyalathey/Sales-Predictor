@@ -7,7 +7,8 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     # return send_file('form.html')
-    return send_file('frontend/src/components/SalesPredictionForm.js')
+    # return send_file('frontend/src/components/SalesPredictionForm.js')
+    return send_file('form.html')
 
 @app.route('/predict_sales', methods=['POST'])
 def predict_sales():
@@ -91,4 +92,4 @@ def predict_sales():
     return jsonify({'prediction': list(prediction)})   
 
 if __name__ == '__main__':
-    app.run(debug=True, port=3001)
+    app.run(debug=True, port=3000)

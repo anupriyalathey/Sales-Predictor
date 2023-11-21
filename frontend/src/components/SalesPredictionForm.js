@@ -1,5 +1,4 @@
-// src/components/SalesPredictionForm.js
-import React,{useState} from 'react';
+import React, {useState, useRef} from 'react';
 import {
   ChakraProvider,
   Flex,
@@ -41,6 +40,9 @@ import axios from 'axios';
 // }
 
 const SalesPredictionForm = () => {  
+  const formRef = useRef();
+  const resultRef = useRef();
+
   const [formData, setFormData] = useState({
     Item_Weight: '',
     Item_Fat_Content: '0',
@@ -56,32 +58,66 @@ const SalesPredictionForm = () => {
 
   const [predictionResult, setPredictionResult] = useState(null);
   
-  const handleInputChange = (e) => {
-      const { name, value } = e.target;
-      setFormData({ ...formData, [name]: value });
-    };
+  // const handleInputChange = (e) => {
+  //     const { name, value } = e.target;
+  //     setFormData({ ...formData, [name]: value });
+  //   };
 
-  const submitForm = async (event) => {
-    event.preventDefault();
-    // const form = event.target;
-    // const formData = new FormData(form);
 
-    try {
-      const response = await axios.post('/predict_sales', formData);
-      const data = response.data;
-      console.log('Prediction:', data.prediction);
-       // Display the prediction result on the UI
-       setPredictionResult(data.prediction[0]);
-      } catch (error) {
-        console.error('Error:', error);
-      }
-      };
+
+    const submitForm = (event) => {
+        event.preventDefault();
+        
+        // var form = document.getElementById('salesForm');
+        // var formData = new FormData(form);
+        const formData = new FormData(formRef.current);
+
+        console.log('Form Data:', formData);
+
+        fetch('http://localhost:3001/predict_sales', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Prediction:', data.prediction);
+            resultRef.current.innerHTML = `<p>Prediction Result: ${data.prediction[0]}</p>`;
+            setPredictionResult(data.prediction[0]);
+
+            // Display the prediction result on the UI
+            // var resultDiv = document.getElementById('predictionResult');
+            // resultDiv.innerHTML = '<p>Prediction Result: ' + data.prediction[0] + '</p>';
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+
+
+
+  // const submitForm = async (event) => {
+  //   event.preventDefault();
+  //   // const form = event.target;
+  //   // const formData = new FormData(form);
+
+  //   try {
+  //     const response = await axios.post('/predict_sales', formData);
+  //     const data = response.data;
+  //     console.log('Prediction:', data.prediction);
+  //      // Display the prediction result on the UI
+  //      setPredictionResult(data.prediction[0]);
+  //     } catch (error) {
+  //       console.error('Error:', error);
+  //     }
+  //     };
 
   return (
     <ChakraProvider>
       <Box p={4}>
         <Heading>Sales Prediction Form</Heading>
-          <FormControl id="salesForm" onSubmit={submitForm}>
+        <form id="salesForm" ref={formRef} onSubmit={submitForm}>
+          <FormControl >
             <FormLabel>Item Weight</FormLabel>
             <Input type="number" name="Item_Weight" placeholder='0' required />
             <Spacer />
@@ -165,12 +201,20 @@ const SalesPredictionForm = () => {
             <Spacer />
         </FormControl>
         <Button type="submit">Predict</Button>
-        {predictionResult && (
-        <Text>
+        </form>
+        {/* <div id="predictionResult" ref={resultRef}></div> */}
+        {/* {predictionResult && ( */}
+        {/* <Text>
           Prediction Result: {predictionResult}
         </Text>
-      )}
-
+      )} */} 
+        <Box id="predictionResult" ref={resultRef}></Box>
+        {predictionResult && (
+          <Box mt={4}>
+            <Heading size="md">Prediction Result:</Heading>
+            <Box>{predictionResult}</Box>
+          </Box>
+        )}
       </Box>
     </ChakraProvider>
   );
