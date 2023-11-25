@@ -11,14 +11,10 @@ import {
   useMediaQuery,
 } from '@chakra-ui/react';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
-import { FaAlignJustify } from 'react-icons/fa';
-import { Icon } from '@chakra-ui/react';
-
 const Nav = ({ onOpen, ref }) => {
   const [scroll, setScroll] = useState(false);
   const { colorMode, toggleColorMode } = useColorMode();
   const navBg = useColorModeValue('white', 'blackAlpha.200');
-  const [isLargerThanMD] = useMediaQuery('(min-width: 48em)');
 
   const changeScroll = () =>
     document.body.scrollTop > 80 || document.documentElement.scrollTop > 80
@@ -50,18 +46,11 @@ const Nav = ({ onOpen, ref }) => {
           {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
         </IconButton>
 
-        {isLargerThanMD ? (
           <Button>
             <Link target="_blank" rel="noreferrer" href="/signin" fontSize="md" >
               Login
             </Link>
           </Button>
-        ) : (
-          <IconButton ref={ref} onClick={onOpen}>
-            <Icon as={FaAlignJustify} />
-          </IconButton>
-        )}
-
       </Flex>
     </Flex>
   );

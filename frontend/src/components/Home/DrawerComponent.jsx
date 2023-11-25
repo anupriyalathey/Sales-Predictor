@@ -28,7 +28,9 @@ const DrawerComponent = ({ isOpen, onClose, btnRef }) => {
         <DrawerBody>
           <Flex flexDirection="column">
             <Link mb="5">About</Link>
-            <Link>Contact Us</Link>
+            <Link to="contact" spy={true} smooth={true} offset={-130} duration={900} style={{cursor: "pointer"}}>
+              Contact Us
+            </Link>
           </Flex>
         </DrawerBody>
       </DrawerContent>

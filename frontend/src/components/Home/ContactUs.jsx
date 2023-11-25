@@ -24,6 +24,7 @@ import {
     };
     return (
       <Flex
+        id='contact'
         w="full"
         minHeight="90vh"
         py="16"

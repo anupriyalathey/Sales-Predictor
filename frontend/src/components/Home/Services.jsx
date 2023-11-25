@@ -21,14 +21,6 @@ import {
         justifyContent="center"
         flexDirection={isLargerThanLG ? 'row' : 'column'}
       >
-        <Flex
-          w={isLargerThanLG ? '40%' : 'full'}
-          mb={isLargerThanLG ? '0' : '6'}
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Image alt="Chakra Team" w="full" />
-        </Flex>
         <Spacer />
         <Flex
           w={isLargerThanLG ? '60%' : 'full'}
@@ -42,10 +34,6 @@ import {
           <Text mb="6" opacity="0.8">
             Predict your sales and revenue with the help of our data analytics.
           </Text>
-  
-          {/* <Button width="200px" size="lg" colorScheme="blue">
-            CONTACT US
-          </Button> */}
         </Flex>
       </Flex>
     );

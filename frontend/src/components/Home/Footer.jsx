@@ -15,12 +15,6 @@ const Footer = () => {
       paddingTop={4}
 
 >
-      {/* <Text mb="3">
-        Provided by{' '}
-        <Link href="https://appseed.us" isExternal color="blue.500">
-          AppSeed
-        </Link>
-      </Text> */}
       <Text>Build with ❤️ by</Text>
       <Spacer />
       <Text opacity="0.5">Anupriya Lathey (102103373)</Text>
