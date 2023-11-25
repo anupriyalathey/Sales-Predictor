@@ -5,38 +5,97 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sales Prediction Form</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Arial', sans-serif;
+        background-color: #1a202c;
+        color: white;
+        font-weight: bold;
+
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    form {
+        max-width: 400px;
+        margin: 0 auto;
+        background-color: #1a202c;
+        color: #93959a;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(148, 199, 216, 0.594);
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input,
+    select {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        font-weight: bold;
+        background-color: aliceblue;
+
+    }
+
+    #button {
+        background-color: #63b3ed;
+        color: #1e2b72;
+        font-weight: bold;
+        padding: 10px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    #predictionResult {
+        margin-top: 20px;
+        text-align: center;
+    }
+</style>
 </head>
+
 <body>
     <h2>Sales Prediction Form</h2>
     <form id="salesForm">
         <label for="ItemWeight">Item Weight:</label>
-        <input type="number" name="Item_Weight" value="Item_Weight" step="0.1" required><br>
+        <input type="number" name="Item_Weight" value="Item_Weight" step="0.1" required><br><br>
         
         <label for="ItemFatContent">Item Fat Content:</label>
         <select name="Item_Fat_Content" required>
             <option value="0">Low Fat</option>
             <option value="1">Regular</option>
-        </select><br>
+        </select><br><br>
 
         <label for="ItemVisibility">Item Visibility:</label>
-        <input type="number" name="Item_Visibility" value="ItemVisibility" step="0.01" required><br>
+        <input type="number" name="Item_Visibility" value="ItemVisibility" step="0.01" required><br><br>
 
         <label for="ItemMRP">Item MRP:</label>
-        <input type="number" name="Item_MRP" value="ItemMRP" step="0.01" required><br>
+        <input type="number" name="Item_MRP" value="ItemMRP" step="0.01" required><br><br>
 
         <label for="OutletSize">Outlet Size:</label>
         <select name="Outlet_Size" required>
             <option value="1">Small</option>
             <option value="2">Medium</option>
             <option value="3">High</option>
-        </select><br>
+        </select><br><br>
 
         <label for="OutletLocationType">Outlet Location Type:</label>
         <select name="Outlet_Location_Type" required>
             <option value="1">Tier 1</option>
             <option value="2">Tier 2</option>
             <option value="3">Tier 3</option>
-        </select><br>
+        </select><br><br>
 
         <label for="OutletType">Outlet Type:</label>
         <select name="OutletType" required>
@@ -44,10 +103,10 @@
             <option value="2">Supermarket Type 2</option>
             <option value="3">Supermarket Type 3</option>
             <option value="4">Grocery Store</option>
-        </select><br>
+        </select><br><br>
 
         <label for="OutletAge">Outlet Age:</label>
-        <input type="number" name="Outlet_Age" value="OutletAge" required><br>
+        <input type="number" name="Outlet_Age" value="OutletAge" required><br><br>
 
         <label for="ItemType">Item Type</label>
         <select name="ItemType" required>
@@ -66,10 +125,10 @@
             <option value="13">Snack Foods</option>
             <option value="14">Soft Drinks</option>
             <option value="15">Starchy Foods</option>
-        </select><br>
+        </select><br><br>
 
         <label for="OutletIdentifier">Outlet Identifier</label>
-        <select name="outlet_identifier">
+        <select name="outlet_identifier" required>
             <option value="OUT013">OUT013</option>
             <option value="OUT017">OUT017</option>
             <option value="OUT018">OUT018</option>
@@ -80,9 +139,9 @@
             <option value="OUT046">OUT046</option>
             <option value="OUT049">OUT049</option>
         </select>
-        <br>
+        <br><br><br>
 
-        <input type="submit" value="Predict" onclick="submitForm(event)">
+        <input id="button" type="submit" value="Predict" onclick="submitForm(event)">
     </form>
 
     <div id="predictionResult"></div>
@@ -110,6 +169,9 @@
             })
             .catch(error => {
                 console.error('Error:', error);
+                var resultDiv = document.getElementById('predictionResult');
+                resultDiv.innerHTML = '<p>Error: Enter all fields! </p>';
+
             });
         }
     </script>

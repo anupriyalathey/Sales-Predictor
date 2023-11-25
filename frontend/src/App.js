@@ -1,11 +1,10 @@
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import logo from './logo.svg';
 import './App.css';
-import SalesPredictionForm from './components/SalesPredictionForm';
 import { ChakraProvider } from '@chakra-ui/react'
 import Signin from './components/Signin';
 import Signup from './components/Signup';
 import Home from './components/Home';
+import Sales from './components/Sales';
 
 function App() {
   return (
@@ -16,7 +15,7 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/signin' element={<Signin />} />
           <Route path='/signup' element={<Signup />} />
-          <Route path='/sales' element={<SalesPredictionForm />} />
+          <Route path='/sales' element={<Sales />} />
         </Routes>
       </Router>
   </div>

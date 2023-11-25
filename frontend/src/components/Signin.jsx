@@ -46,7 +46,6 @@ export default function Signin() {
         setErrorMsg(err.message);
       });
   };
-  const [showPassword, setShowPassword] = useState(false)
 
   useEffect(() => {
         // Use the 'app' instance as needed

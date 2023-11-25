@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import {
   Text,
   Flex,
+  Button,
+  Link,
   Spacer,
   IconButton,
   useColorMode,
@@ -49,11 +51,11 @@ const Nav = ({ onOpen, ref }) => {
         </IconButton>
 
         {isLargerThanMD ? (
-          <>
-            <a target="_blank" rel="noreferrer" href="/signin" fontSize="md" mr="10">
+          <Button>
+            <Link target="_blank" rel="noreferrer" href="/signin" fontSize="md" >
               Login
-            </a>
-          </>
+            </Link>
+          </Button>
         ) : (
           <IconButton ref={ref} onClick={onOpen}>
             <Icon as={FaAlignJustify} />

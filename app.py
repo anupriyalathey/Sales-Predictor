@@ -1,16 +1,16 @@
 from flask import Flask, request, jsonify, send_file
-import pandas as pd # data processing
+import pandas as pd 
 import pickle
+from flask_cors import CORS
 
 app = Flask(__name__)
 
 @app.route('/')
 def home():
-    # return send_file('form.html')
-    # return send_file('frontend/src/components/SalesPredictionForm.js')
     return send_file('form.html')
 
 @app.route('/predict_sales', methods=['POST'])
+    
 def predict_sales():
     print(request.form)
 
@@ -22,7 +22,7 @@ def predict_sales():
             'Item_MRP': int(input_data.get('Item_MRP')),
             'Outlet_Size': int(input_data.get('Outlet_Size')),
             'Outlet_Location_Type': int(input_data.get('Outlet_Location_Type')),
-            'Outlet_Type': 1, # TODO   
+            'Outlet_Type': int(input_data.get('Outlet_Location_Type')), 
             'Outlet_Age': int(input_data.get('Outlet_Age', 0)),
         }
 

@@ -1,7 +1,7 @@
 // src/firebase/firebaseConfig.js
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword, signOut     } from "firebase/auth";
+import { getAuth} from "firebase/auth";
 
 
 const firebaseConfig = {
@@ -17,17 +17,5 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = getAuth();
-
-// signInWithCustomToken(auth, token)
-//   .then((userCredential) => {
-//     // Signed in
-//     const user = userCredential.user;
-//     // ...
-//   })
-//   .catch((error) => {
-//     const errorCode = error.code;
-//     const errorMessage = error.message;
-//     // ...
-//   });
 
 export { app, analytics, auth };

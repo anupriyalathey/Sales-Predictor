@@ -21,7 +21,7 @@ const Footer = () => {
           AppSeed
         </Link>
       </Text> */}
-      <Text>Build with ❤️</Text>
+      <Text>Build with ❤️ by</Text>
       <Spacer />
       <Text opacity="0.5">Anupriya Lathey (102103373)</Text>
       <Text opacity="0.5">Nitleen Kaur (102103377)</Text>
