@@ -69,7 +69,7 @@
     <h2>Sales Prediction Form</h2>
     <form id="salesForm">
         <label for="ItemWeight">Item Weight:</label>
-        <input type="number" name="Item_Weight" value="Item_Weight" step="0.1" required><br><br>
+        <input type="number" name="Item_Weight" value="Item_Weight" value="Item_Weight" step="0.01" min="0.01"><br><br>
         
         <label for="ItemFatContent">Item Fat Content:</label>
         <select name="Item_Fat_Content" required>
@@ -78,10 +78,22 @@
         </select><br><br>
 
         <label for="ItemVisibility">Item Visibility:</label>
-        <input type="number" name="Item_Visibility" value="ItemVisibility" step="0.01" required><br><br>
+        <select name="Item_Visibility" required>
+            <option value="0">0</option>
+            <option value="0.1">0.1</option>
+            <option value="0.2">0.2</option>
+            <option value="0.3">0.3</option>
+            <option value="0.4">0.4</option>
+            <option value="0.5">0.5</option>
+            <option value="0.6">0.6</option>
+            <option value="0.7">0.7</option>
+            <option value="0.8">0.8</option>
+            <option value="0.9">0.9</option>
+            </select>
+            <br><br>
 
         <label for="ItemMRP">Item MRP:</label>
-        <input type="number" name="Item_MRP" value="ItemMRP" step="0.01" required><br><br>
+        <input type="number" name="Item_MRP" value="ItemMRP" step="0.01" min="0.01" required><br><br>
 
         <label for="OutletSize">Outlet Size:</label>
         <select name="Outlet_Size" required>
@@ -106,7 +118,7 @@
         </select><br><br>
 
         <label for="OutletAge">Outlet Age:</label>
-        <input type="number" name="Outlet_Age" value="OutletAge" required><br><br>
+        <input type="number" name="Outlet_Age" value="OutletAge" step="1" min="1" required><br><br>
 
         <label for="ItemType">Item Type</label>
         <select name="ItemType" required>
