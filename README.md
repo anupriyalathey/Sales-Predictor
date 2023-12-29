@@ -1,4 +1,4 @@
-# Sales Vision
+# Sales Predictor
 Predict the sales of your business using our machine learning model.
 
 ## How to run
