@@ -35,7 +35,7 @@ REACT_APP_FIREBASE_MEASUREMENT_ID=
 yarn start
 ```
 
-Visit your app on `http://localhost:3001.
+Visit your app on `http://localhost:3001`.
 
 ## Tech Stack 
 1. ReactJS
