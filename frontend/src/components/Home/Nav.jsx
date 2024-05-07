@@ -8,10 +8,9 @@ import {
   IconButton,
   useColorMode,
   useColorModeValue,
-  useMediaQuery,
 } from '@chakra-ui/react';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
-const Nav = ({ onOpen, ref }) => {
+const Nav = () => {
   const [scroll, setScroll] = useState(false);
   const { colorMode, toggleColorMode } = useColorMode();
   const navBg = useColorModeValue('white', 'blackAlpha.200');
@@ -40,7 +39,13 @@ const Nav = ({ onOpen, ref }) => {
       </Text>
 
       <Spacer />
-      
+      <Button>
+            <Link target="_blank" rel="noreferrer" href="/blogs" fontSize="md" >
+              Blogs
+            </Link>
+      </Button>
+
+      <Spacer />
       <Flex alignItems="center">
         <IconButton mr="10" w={6} h={6} p={5} onClick={toggleColorMode}>
           {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}

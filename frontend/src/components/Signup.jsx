@@ -16,7 +16,7 @@ import {
 } from '@chakra-ui/react'
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from 'react'
-import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import {auth} from "../firebase/firebaseConfig";
 

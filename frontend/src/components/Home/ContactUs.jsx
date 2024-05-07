@@ -7,13 +7,22 @@ import {
     Button,
     useMediaQuery,
     useToast,
+    Link
   } from '@chakra-ui/react';
-  import React from 'react';
+  import React, {useState} from 'react';
   
   const ContactUs = () => {
     const [isLargerThanLG] = useMediaQuery('(min-width: 62em)');
     const toast = useToast();
+  const [subject, setSubject] = useState('');
+  const [body, setBody] = useState('');
+
     const submitForm = () => {
+      const encodedSubject = encodeURIComponent(subject);
+      const encodedBody = encodeURIComponent(body);
+      const mailtoLink = `https://mail.google.com/mail/?view=cm&fs=1&to=anupriyalathey@gmail.com&su=${encodedSubject}&body=${encodedBody}`;
+      window.open(mailtoLink, "_blank");
+
       return toast({
         title: 'Message sent!🚀',
         description: 'Thank you for contacting us!',
@@ -22,6 +31,9 @@ import {
         isClosable: true,
       });
     };
+
+
+
     return (
       <Flex
         id='contact'
@@ -53,10 +65,10 @@ import {
   
           <Input id="email" type="email" placeholder="Email" mb="5" h="14" />
   
-          <Input id="subject" type="text" placeholder="Subject" mb="5" h="14" />
+          <Input id="subject" value={subject} type="text" placeholder="Subject" mb="5" h="14" onChange={(e) => setSubject(e.target.value)}/>
   
-          <Textarea placeholder="Enter a message" mb="5" rows={7} p="5" />
-  
+          <Textarea id="body" value={body} placeholder="Enter a message" mb="5" rows={7} p="5" onChange={(e) => setBody(e.target.value)}/>
+
           <Button
             colorScheme="blue"
             size="lg"
@@ -67,6 +79,7 @@ import {
           >
             SUBMIT
           </Button>
+
         </FormControl>
       </Flex>
     );
